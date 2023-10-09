@@ -9,7 +9,7 @@ export class FilmRepository extends Repository<Film> {
   async getFilms(filter: FilterFilmDto): Promise<Film[]> {
     const { title, release_date, original_language } = filter;
 
-    const query = this.createQueryBuilder('book');
+    const query = this.createQueryBuilder('film');
 
     if (title) {
       query.andWhere('lower(film.title) LIKE :title', {
@@ -24,7 +24,7 @@ export class FilmRepository extends Repository<Film> {
     }
 
     if (original_language) {
-      query.andWhere('lower(book.original_language) LIKE :original_language', {
+      query.andWhere('lower(film.original_language) LIKE :original_language', {
         original_language: `%${original_language.toLowerCase()}`,
       });
     }
